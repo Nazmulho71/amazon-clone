@@ -1,6 +1,8 @@
 import React from "react";
-import "./Product.css";
+import { toast } from "react-toastify";
 import { useStateValue } from "./StateProvider";
+import "react-toastify/dist/ReactToastify.css";
+import "./Product.css";
 
 function Product({ id, title, image, price, rating }) {
   const [{ basket }, dispatch] = useStateValue();
@@ -17,6 +19,13 @@ function Product({ id, title, image, price, rating }) {
         rating: rating,
       },
     });
+    toast.warning('Item was added to your basket',{
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+        pauseOnFocusLoss: false,
+        pauseOnHover: false,
+        hideProgressBar: true,        
+    })
   };
 
   return (
@@ -31,7 +40,7 @@ function Product({ id, title, image, price, rating }) {
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <p>🌟</p>
+              <p>⭐</p>
             ))}
         </div>
       </div>
